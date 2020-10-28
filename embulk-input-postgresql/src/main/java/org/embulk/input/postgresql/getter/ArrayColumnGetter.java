@@ -64,6 +64,9 @@ public class ArrayColumnGetter
                     case Types.BIT:  // JDBC BIT is boolean, unlike SQL-92
                         arrayNode.add(jsonNodeFactory.booleanNode((Boolean) v));
                         break;
+                    case Types.VARBIT:
+                        arrayNode.add(jsonNodeFactory.booleanNode((Boolean) v));
+                        break;
                     case Types.CHAR:
                     case Types.VARCHAR:
                     case Types.LONGVARCHAR:
@@ -129,6 +132,14 @@ public class ArrayColumnGetter
                         break;
                     case Types.BOOLEAN:
                     case Types.BIT:  // JDBC BIT is boolean, unlike SQL-92
+                        if (((Boolean) v)) {
+                            builder.append("t");
+                        }
+                        else {
+                            builder.append("f");
+                        }
+                        break;
+                    case Types.VARBIT:
                         if (((Boolean) v)) {
                             builder.append("t");
                         }
